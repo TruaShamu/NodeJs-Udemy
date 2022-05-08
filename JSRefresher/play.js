@@ -21,3 +21,13 @@ const summarizeUser = (userName, userAge, userCool) => {
 //console.log(summarizeUser(name, age, isCool));
 console.log(killjoy);
 killjoy.title();
+
+const arrTest = ['Jet Star', 'Kobra Kid'];
+/*for (let oLet of arr) {
+    console.log(oLet);
+}*/
+
+console.log(arrTest.map(arr => {
+    return "Killjoy: " + arr;
+}));
+console.log(arrTest);
