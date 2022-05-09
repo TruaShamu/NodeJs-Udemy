@@ -30,4 +30,22 @@ const arrTest = ['Jet Star', 'Kobra Kid'];
 console.log(arrTest.map(arr => {
     return "Killjoy: " + arr;
 }));
-console.log(arrTest);
+const copiedArr = [...arrTest];
+console.log(copiedArr);
+arrTest.push("Fun Ghoul");
+console.log(copiedArr);
+
+
+const copiedKilljoy = {...killjoy};
+console.log(copiedKilljoy);
+
+const toArray = (...args) => {
+    return args;
+}
+console.log(toArray("jello", true, 1));
+
+const printName = ({name}) => {
+    console.log(name);
+}
+
+printName(killjoy);
