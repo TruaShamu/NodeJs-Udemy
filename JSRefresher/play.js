@@ -49,3 +49,5 @@ const printName = ({name}) => {
 }
 
 printName(killjoy);
+
+const arr2 = [1, 2, 'ssss', true, false];
