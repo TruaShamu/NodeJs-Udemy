@@ -5,10 +5,29 @@ const requestHandler = (req, res) => {
     const method = req.method;
     if (url === "/") {
         res.write('<html>');
-        res.write('<head><title>Enter Message</title></head>');
-        res.write('<body><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></form></body>');
+        res.write('<head><title>Assignment 1!</title></head>');
+        res.write('<body>');
+        res.write('<h1>Enter Username:<h1>');
+        res.write('<form action="/message" method="POST"><input type="text" name="username"><button type="submit">Send</button></form>');
+        res.write('</body>')
         res.write('</html>');
         return res.end();
+    }
+
+    if (url === '/users') {
+        res.write('<html>');
+        res.write('<head><title>Assignment 1</title></head>');
+        res.write('<body>');
+        res.write('<ul>');
+        res.write('<li>Trua</li>');
+        res.write('<li>Makaio</li>');
+        res.write('<li>Nalani</li>');
+        res.write('<li>Malia</li>');
+        res.write('<li>Katina</li>')
+        res.write('</ul>')
+        res.write('</body>')
+        res.write('</html>')
+        return res.end()
     }
     if (url === "/message" && method === "POST") {
         const body = [];
