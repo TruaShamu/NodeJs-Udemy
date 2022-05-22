@@ -29,8 +29,8 @@ const requestHandler = (req, res) => {
     }
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');
-    res.write('<head><title>Jello!!!!</title></head>');
-    res.write('<body><h1>Killjoys, make some noise!!!</h1></body>');
+    res.write('<head><title>My First Page</title></head>');
+    res.write('<body><h1>Hello from my Node.js Server!</h1></body>');
     res.write('</html>');
     res.end();
     //process.exit();
@@ -38,7 +38,7 @@ const requestHandler = (req, res) => {
 
 module.exports = {
     handler: requestHandler,
-    someText: 'THE BLACK PARADE'
+    someText: 'testtext'
 };
 
 module.exports.handler = requestHandler;
