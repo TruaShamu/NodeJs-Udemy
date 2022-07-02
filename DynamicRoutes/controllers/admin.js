@@ -56,7 +56,8 @@ exports.postEditProduct = (req, res, next) => {
 	console.log(updatedProduct);
 	updatedProduct.save();
 	res.redirect('/admin/products');
-}
+};
+
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {
 	res.render('admin/products', {
@@ -65,4 +66,10 @@ exports.getProducts = (req, res, next) => {
 	  path: '/admin/products'
 	});
   });
+};
+
+exports.postDeleteProducts = (req, res, next) => {
+	const prodId = req.body.productId;
+	Product.deleteById(prodId);
+	res.redirect('/admin/products');
 };
