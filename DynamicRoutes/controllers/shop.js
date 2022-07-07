@@ -41,13 +41,10 @@ exports.getIndex = (req, res, next) => {
 			console.log(err)
 		});
 };
-/*
+
 exports.getCart = (req, res, next) => {
 	req.user
 		.getCart()
-		.then(cart => {
-			return cart
-			.getProducts()
 			.then(products => {
 				res.render('shop/cart', {
 					path: '/cart',
@@ -56,9 +53,7 @@ exports.getCart = (req, res, next) => {
 				});
 			})
 		.catch(err => console.log(err));
-		})
-		.catch(err => console.log(err));
-};*/
+};
 	
 exports.postCart = (req, res, next) => {
 	const prodId = req.body.productId;
