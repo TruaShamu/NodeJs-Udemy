@@ -1,5 +1,5 @@
 const Product = require('../models/product');
-const Cart = require('../models/cart');
+//const Cart = require('../models/cart');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -11,27 +11,21 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
 	const title = req.body.title;
-	const imageUrl = req.body.imageUrl;
 	const price = req.body.price;
+	const imageUrl = req.body.imageUrl;
 	const description = req.body.description;
-	req.user
-	  .createProduct({
-		title: title,
-		price: price,
-		imageUrl: imageUrl,
-		description: description
-	  })
-	  .then(result => {
+	const product = new Product(title, price, imageUrl, description);
+	product.save().then(result => {
 		// console.log(result);
 		console.log('Created Product');
 		res.redirect('/admin/products');
-	  })
+	})
 	  .catch(err => {
 		console.log(err);
 	  });
   };
 
-exports.getEditProduct = (req, res, next) => {
+/* exports.getEditProduct = (req, res, next) => {
 	const editMode = req.query.edit;
 	console.log(editMode);
 	if (!editMode) {
@@ -104,4 +98,5 @@ exports.postDeleteProducts = (req, res, next) => {
 		.catch(err => {
 			console.log(err);
 		});
-};
+	
+};	*/
