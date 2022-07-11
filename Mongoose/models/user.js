@@ -22,6 +22,19 @@ const userSchema = new Schema({
 		quantity: { type: Number, required: true }
 		}
 	]
+	},
+
+	order: {
+		items: [
+			{
+			productId: {
+				type: Schema.Types.ObjectId,
+				ref: 'Product',
+				required: true
+			},
+			quantity: { type: Number, required: true }
+			}
+		]
 	}
 });
 
@@ -53,6 +66,12 @@ userSchema.methods.removeFromCart = function(productId) {
 		return item.productId != productId;
 	});
 	this.cart.items = updatedCartItems;
+	return this.save();
+};
+
+
+userSchema.methods.clearCart = function() {
+	this.cart = {items: []};
 	return this.save();
 };
 
