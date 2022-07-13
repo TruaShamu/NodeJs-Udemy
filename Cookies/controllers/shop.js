@@ -5,7 +5,7 @@ exports.getProducts = (req, res, next) => {
   Product.find()
     .then(products => {
       res.render('shop/product-list', {
-        isAuthenticated: req.isLoggedIn,
+        isAuthenticated: req.session.isLoggedIn,
         prods: products,
         pageTitle: 'All Products',
         path: '/products'
@@ -24,7 +24,7 @@ exports.getProduct = (req, res, next) => {
         product: product,
         pageTitle: product.title,
         path: '/products',
-        isAuthenticated: req.isLoggedIn
+        isAuthenticated: req.session.isLoggedIn
       });
     })
     .catch(err => console.log(err));
@@ -37,7 +37,7 @@ exports.getIndex = (req, res, next) => {
         prods: products,
         pageTitle: 'Shop',
         path: '/',
-        isAuthenticated: req.isLoggedIn
+        isAuthenticated: req.session.isLoggedIn
       });
     })
     .catch(err => {
@@ -61,17 +61,22 @@ exports.getCart = (req, res, next) => {
     });
 };
 
+
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findById(prodId)
     .then(product => {
-      return req.user.addToCart(product);
+      console.log(product);
+      console.log(req.user);
+      req.user.addToCart(product);
+      return;
     })
     .then(result => {
       console.log(result);
       res.redirect('/cart');
     });
 };
+
 
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
