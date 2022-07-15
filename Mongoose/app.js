@@ -33,7 +33,7 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoose.connect('mongodb+srv://Trua:***REMOVED***@cluster0.uzeyt.mongodb.net/shop?retryWrites=true&w=majority').then(result => {
+mongoose.connect('mongodb+srv://Trua:**REMOVED**@cluster0.uzeyt.mongodb.net/shop?retryWrites=true&w=majority').then(result => {
 	User.findOne().then(user => {
 		if (!user) {
 			const user = new User({
