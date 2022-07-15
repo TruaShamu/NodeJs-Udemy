@@ -11,7 +11,7 @@ const User = require('./models/user');
 const Product = require('./models/product');
 const Order = require('./models/order');
 
-const MONGODB_URI = 'mongodb+srv://Trua:***REMOVED***@cluster0.uzeyt.mongodb.net/shop?w=majority'
+const MONGODB_URI = 'mongodb+srv://Trua:**REMOVED**@cluster0.uzeyt.mongodb.net/shop?w=majority'
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
