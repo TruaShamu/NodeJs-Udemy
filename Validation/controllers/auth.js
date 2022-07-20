@@ -74,7 +74,8 @@ exports.getSignup = (req, res, next) => {
     pageTitle: 'Signup',
     isAuthenticated: false,
     errorMessage : message,
-    oldInput: {email: '', password: '', confirmPassword: ''}
+    oldInput: {email: '', password: '', confirmPassword: ''},
+    validationErrors: []
   });
 };
 
@@ -90,7 +91,8 @@ exports.postSignup = (req, res, next) => {
         path: '/signup',
         pageTitle: 'Signup',
         errorMessage : errors.array()[0].msg,
-        oldInput: {email: email, password: password, confirmPassword: req.body.confirmPassword}
+        oldInput: {email: email, password: password, confirmPassword: req.body.confirmPassword},
+        validationErrors: errors.array()
       });
   }
   bcrypt
