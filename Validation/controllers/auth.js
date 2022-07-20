@@ -28,6 +28,15 @@ exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render('auth/login', {
+      path: '/login',
+      pageTitle: 'Login',
+      isAuthenticated: false,
+      errorMessage : errors.array()[0].msg
+    });
+  }
   User.findOne({email: email})
     .then(user => {
       if (!user) {
@@ -71,48 +80,39 @@ exports.getSignup = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  const confirmPassword = req.body.confirmPassword;
   const errors = validationResult(req);
+  console.log(email);
   console.log(errors.array());
   if (!errors.isEmpty()) {
     return res.status(422)
       .render('auth/signup', {
         path: '/signup',
         pageTitle: 'Signup',
-        isAuthenticated: false,
         errorMessage : errors.array()[0].msg
       });
   }
-  User.findOne({ email: email })
-    .then(userDoc => {
-      if (userDoc) {
-        req.flash('error', 'E-Mail exists already, please pick a different one.');
-        return res.redirect('/signup');
-      }
-      return bcrypt
-        .hash(password, 12)
-        .then(hashedPassword => {
-          const user = new User({
-            email: email,
-            password: hashedPassword,
-            cart: { items: [] }
-          });
-          return user.save();
-        })
-        .then(result => {
-          const recipients = [new Recipient(email, "Recipient")];
-
-          const emailParams = new EmailParams()
-            .setFrom("trua@jello-whales.net")
-            .setFromName("Trua")
-            .setRecipients(recipients)
-            .setSubject("Signup suceeded!")
-            .setHtml("<h1>You successfully signed up!<h1>");
-
-mailersend.send(emailParams);
-          res.redirect('/login');
-        });
+  bcrypt
+    .hash(password, 12)
+    .then(hashedPassword => {
+      const user = new User({
+        email: email,
+        password: hashedPassword,
+        cart: { items: [] }
+      });
+      return user.save();
     })
+    .then(result => {
+          res.redirect('/login');
+      /* const recipients = [new Recipient(email, "Recipient")];
+
+      const emailParams = new EmailParams()
+        .setFrom("trua@jello-whales.net")
+        .setFromName("Trua")
+        .setRecipients(recipients)
+        .setSubject("Signup suceeded!")
+        .setHtml("<h1>You successfully signed up!<h1>");
+        mailersend.send(emailParams);*/
+        }) 
     .catch(err => {
       console.log(err);
     });
