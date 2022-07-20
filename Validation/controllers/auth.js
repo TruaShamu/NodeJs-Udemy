@@ -20,7 +20,9 @@ exports.getLogin = (req, res, next) => {
     path: '/login',
     pageTitle: 'Login',
     isAuthenticated: false,
-    errorMessage : message
+    errorMessage : message,
+    oldInput: {email: '', password: ''},
+    validationErrors: []
   });
 };
 
@@ -34,7 +36,9 @@ exports.postLogin = (req, res, next) => {
       path: '/login',
       pageTitle: 'Login',
       isAuthenticated: false,
-      errorMessage : errors.array()[0].msg
+      errorMessage : errors.array()[0].msg,
+      oldInput: {email: email, password: password},
+      validationErrors: errors.array()
     });
   }
   User.findOne({email: email})
