@@ -16,7 +16,7 @@ router.get('/products', isAuth, adminController.getProducts);
 // /admin/add-product => POST
 router.post('/add-product', [
     body('title').isLength({min: 3}).trim(),
-    body('imageUrl').isURL(),
+    body('imageUrl'),
     body('price').isFloat(),
     body('description').isLength({min: 8, max: 500}).trim(),
 ], isAuth, adminController.postAddProduct);
