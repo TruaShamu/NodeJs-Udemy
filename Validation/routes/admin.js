@@ -25,7 +25,7 @@ router.get('/edit-product/:productId', isAuth, adminController.getEditProduct);
 
 router.post('/edit-product',  [
     body('title').isLength({min: 3}).trim(),
-    body('imageUrl').isURL(),
+    body('imageUrl'),
     body('price').isFloat(),
     body('description').isLength({min: 8, max: 500}).trim(),
 ], isAuth, adminController.postEditProduct);
