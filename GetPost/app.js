@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const feedRoutes = require('./routes/feed');
+const authRoutes = require('./routes/auth');
+
 
 const fileStorage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -35,12 +37,16 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 })
+
 app.use('/feed', feedRoutes);
+app.use('/auth', authRoutes);
+
 app.use((error, req, res, next) => {
     console.log(error);
     const status = error.statusCode || 500;
     const message = error.message;
-    res.statusCode(status).json({ message: message });
+    const data = error.data;
+    res.statusCode(status).json({ message: message, data: data });
 
 })
 const MONGODB_URI = 'mongodb+srv://Trua:asty0228@cluster0.uzeyt.mongodb.net/messages?w=majority'
