@@ -9,17 +9,27 @@ on:
       - master
   workflow_dispatch:
 
+runs:
+  using: 'node16'
+  main: 'main.js
+
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
+        runs:
+          using: 'node16'
+          main: 'main.js
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
+        runs:
+          using: 'node16'
+          main: 'main.js
 
       - name: npm install, build, and test
         run: |
