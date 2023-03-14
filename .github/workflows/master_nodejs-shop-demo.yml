@@ -19,9 +19,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        runs:
-          using: 'node16'
-          main: 'main.js
 
       - name: Set up Node.js version
         uses: actions/setup-node@v2
